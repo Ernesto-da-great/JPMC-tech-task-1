@@ -1,0 +1,38 @@
+From f31e64690fa5bd1ca0b6b8e5c8622c47412e75d0 Mon Sep 17 00:00:00 2001
+From: Ernest Haruna <ernestharuna1@gmail.com>
+Date: Thu, 8 Sep 2022 15:30:59 +0100
+Subject: [PATCH] Create Patch File
+
+---
+ client.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/client.py b/client.py
+index 241e4c9..bfc100f 100644
+--- a/client.py
++++ b/client.py
+@@ -42,6 +42,8 @@ def getRatio(price_a, price_b):
+ 	""" Get ratio of price_a and price_b """
+ 	""" ------------- Update this function ------------- """
+ 	""" Also create some unit tests for this function in client_test.py """
++	if (price_b == 0):
++		return
+ 	return price_a / price_b
+ 
+ # Main
+@@ -52,8 +54,10 @@ if __name__ == "__main__":
+ 		quotes = json.loads(urllib2.urlopen(QUERY.format(random.random())).read())
+ 
+ 		""" ----------- Update to get the ratio --------------- """
++		prices = {}
+ 		for quote in quotes:
+ 			stock, bid_price, ask_price, price = getDataPoint(quote)
++			prices[stock] = price
+ 			print ("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+ 
+-		print ("Ratio %s" % (getRatio(price['ABC'], price['DEF'])))
++		print ("Ratio %s" % (getRatio(prices['ABC'], prices['DEF'])))
+\ No newline at end of file
+-- 
+2.34.1.windows.1
+
